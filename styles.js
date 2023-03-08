@@ -10,6 +10,7 @@ export default StyleSheet.create({
       alignItems: "center",
       padding: 20,
       marginTop: 80, // equal to the height of the title
+      paddingBottom: 100, // add padding to the bottom of the ScrollView
    },
    titleContainer: {
       position: "absolute",
@@ -46,5 +47,8 @@ export default StyleSheet.create({
       textAlign: "center",
       color: "#fff",
       fontSize: 18,
+   },
+   button: {
+      color: "blue",
    },
 });
