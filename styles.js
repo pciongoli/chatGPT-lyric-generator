@@ -1,28 +1,50 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
    container: {
       flex: 1,
-      alignItems: "center",
+   },
+   scrollContainer: {
+      flexGrow: 1,
       justifyContent: "center",
-      paddingHorizontal: 20,
+      alignItems: "center",
+      padding: 20,
+      marginTop: 80, // equal to the height of the title
+   },
+   titleContainer: {
+      position: "absolute",
+      top: 55,
+      left: 0,
+      right: 0,
+      alignItems: "center",
+      height: 80, // height of the title
+   },
+   title: {
+      fontSize: 32,
+      fontWeight: "bold",
+      color: "#fff",
+   },
+   image: {
+      width: "50%",
+      height: 200,
+      resizeMode: "contain",
+      marginBottom: 20,
    },
    input: {
-      borderWidth: 1,
-      borderColor: "#ccc",
-      borderRadius: 5,
+      marginTop: 20,
+      marginBottom: 10,
       padding: 10,
-      marginBottom: 20,
+      borderWidth: 1,
+      borderColor: "#fff",
+      borderRadius: 10,
       width: "100%",
-   },
-   button: {
-      marginBottom: 20,
+      color: "#fff",
+      fontSize: 18,
    },
    generatedLyrics: {
-      fontSize: 18,
+      marginTop: 10,
       textAlign: "center",
-      marginVertical: 20,
+      color: "#fff",
+      fontSize: 18,
    },
 });
-
-export default styles;

@@ -1,6 +1,8 @@
+// getAiResponse.js
+
 import axios from "axios";
 
-async function getAiResponse(topic, apiKey) {
+export default async function getAiResponse(topic, apiKey) {
    const url = "https://api.openai.com/v1/engines/text-davinci-002/completions";
    const data = {
       prompt: topic,
@@ -16,5 +18,3 @@ async function getAiResponse(topic, apiKey) {
    const response = await axios.post(url, data, { headers });
    return response.data.choices[0].text;
 }
-
-export default getAiResponse;
