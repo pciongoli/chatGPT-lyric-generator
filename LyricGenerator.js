@@ -15,8 +15,6 @@ import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { OPENAI_API_KEY } from "@env";
 
-const apiKey = OPENAI_API_KEY;
-
 export default function LyricGenerator({ navigation }) {
    const [prompt, setPrompt] = useState("");
    const [generatedLyrics, setGeneratedLyrics] = useState("");
@@ -28,7 +26,7 @@ export default function LyricGenerator({ navigation }) {
       setLoading(true);
       const lyrics = await getAiResponse(
          "Write a unique song about " + prompt,
-         apiKey
+         OPENAI_API_KEY
       );
       setLoading(false);
       setGeneratedLyrics(lyrics);
@@ -39,11 +37,8 @@ export default function LyricGenerator({ navigation }) {
       setIsEditingLyrics(true);
    }
 
-   function handleSaveLyrics() {
+   function handleEndEditingLyrics() {
       setIsEditingLyrics(false);
-      setSavedLyrics([...savedLyrics, generatedLyrics]); // save the generated lyrics
-      setGeneratedLyrics(""); // clear the generated lyrics
-      navigation.navigate("SavedLyrics", { savedLyrics: savedLyrics });
    }
 
    function handleCopyLyrics() {
@@ -60,10 +55,6 @@ export default function LyricGenerator({ navigation }) {
          >
             <View style={styles.titleContainer}>
                <Text style={styles.title}>LyriCat</Text>
-               <Button
-                  title="Saved Lyrics"
-                  onPress={() => navigation.navigate("SavedLyrics")}
-               />
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -82,6 +73,7 @@ export default function LyricGenerator({ navigation }) {
                   multiline
                   numberOfLines={4}
                   textAlignVertical="top"
+                  onBlur={handleEndEditingLyrics} // call handleEndEditingLyrics when the user leaves the text input
                />
                <Button
                   title="Generate Your Song!"
@@ -96,11 +88,10 @@ export default function LyricGenerator({ navigation }) {
                            <TextInput
                               style={styles.generatedLyrics}
                               multiline
-                              numberOfLines={10}
+                              numberOfLines={4}
                               value={generatedLyrics}
                               onChangeText={(text) => setGeneratedLyrics(text)}
                            />
-                           <Button title="Save" onPress={handleSaveLyrics} />
                         </View>
                      ) : (
                         <View>
@@ -110,11 +101,7 @@ export default function LyricGenerator({ navigation }) {
                            >
                               {generatedLyrics}
                            </Text>
-                           <Button
-                              style={styles.button}
-                              title="Edit"
-                              onPress={handleEditLyrics}
-                           />
+
                            <Button
                               style={styles.button}
                               title="Copy"
