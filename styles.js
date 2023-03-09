@@ -21,9 +21,12 @@ export default StyleSheet.create({
       height: 80, // height of the title
    },
    title: {
-      fontSize: 32,
+      fontSize: 36, // increased font size
       fontWeight: "bold",
-      color: "#fff",
+      color: "#8A2BE2",
+      textShadowColor: "#8A2BE2", // added text shadow
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
    },
    image: {
       width: "50%",
@@ -36,16 +39,16 @@ export default StyleSheet.create({
       marginBottom: 10,
       padding: 10,
       borderWidth: 1,
-      borderColor: "#fff",
+      borderColor: "#8A2BE2",
       borderRadius: 10,
       width: "100%",
-      color: "#fff",
+      color: "#8A2BE2",
       fontSize: 18,
    },
    generatedLyrics: {
       marginTop: 10,
       textAlign: "center",
-      color: "#fff",
+      color: "#8A2BE2",
       fontSize: 18,
    },
    button: {
