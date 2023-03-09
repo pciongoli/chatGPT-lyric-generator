@@ -13,6 +13,9 @@ import {
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
+import { OPENAI_API_KEY } from "@env";
+
+const apiKey = OPENAI_API_KEY;
 
 export default function LyricGenerator({ navigation }) {
    const [prompt, setPrompt] = useState("");
@@ -22,7 +25,6 @@ export default function LyricGenerator({ navigation }) {
    const [loading, setLoading] = useState(false);
 
    async function handleGenerateLyrics() {
-      const apiKey = "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";
       setLoading(true);
       const lyrics = await getAiResponse(
          "Write a unique song about " + prompt,
