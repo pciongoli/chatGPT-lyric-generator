@@ -49,7 +49,7 @@ export default StyleSheet.create({
       fontSize: 18,
    },
    generatedLyrics: {
-      marginTop: 10,
+      marginTop: 1,
       textAlign: "center",
       color: "#8A2BE2",
       fontSize: 18,

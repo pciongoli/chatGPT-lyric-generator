@@ -71,7 +71,7 @@ export default function LyricGenerator({ navigation }) {
                   placeholder="e.g. Chickens and Turkeys"
                   style={styles.input}
                   multiline
-                  numberOfLines={4}
+                  numberOfLines={2}
                   textAlignVertical="top"
                   onBlur={handleEndEditingLyrics} // call handleEndEditingLyrics when the user leaves the text input
                />
