@@ -13,9 +13,11 @@ import {
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
-import { OPENAI_API_KEY } from "@env";
+
+// import { OPENAI_API_KEY } from "@env";
 
 export default function LyricGenerator({ navigation }) {
+   const apiKey = "";
    const [prompt, setPrompt] = useState("");
    const [generatedLyrics, setGeneratedLyrics] = useState("");
    const [isEditingLyrics, setIsEditingLyrics] = useState(false);
@@ -26,7 +28,7 @@ export default function LyricGenerator({ navigation }) {
       setLoading(true);
       const lyrics = await getAiResponse(
          "Write a unique song about " + prompt,
-         OPENAI_API_KEY
+         apiKey
       );
       setLoading(false);
       setGeneratedLyrics(lyrics);
@@ -71,7 +73,7 @@ export default function LyricGenerator({ navigation }) {
                   placeholder="e.g. Chickens and Turkeys"
                   style={styles.input}
                   multiline
-                  numberOfLines={2}
+                  numberOfLines={4}
                   textAlignVertical="top"
                   onBlur={handleEndEditingLyrics} // call handleEndEditingLyrics when the user leaves the text input
                />
