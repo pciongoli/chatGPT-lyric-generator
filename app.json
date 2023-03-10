@@ -28,9 +28,6 @@
          "eas": {
             "projectId": "e44b9139-c9bc-40b0-a98b-58e40e284d0d"
          }
-      },
-      "expo": {
-         "entryPoint": "./App.js"
       }
    }
 }

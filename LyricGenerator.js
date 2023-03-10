@@ -13,11 +13,12 @@ import {
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
-
-// import { OPENAI_API_KEY } from "@env";
+const openai = require("openai");
 
 export default function LyricGenerator({ navigation }) {
-   const apiKey = "";
+   const apiKey = process.env.OPENAI_API_KEY;
+   openai.apiKey = apiKey;
+
    const [prompt, setPrompt] = useState("");
    const [generatedLyrics, setGeneratedLyrics] = useState("");
    const [isEditingLyrics, setIsEditingLyrics] = useState(false);
