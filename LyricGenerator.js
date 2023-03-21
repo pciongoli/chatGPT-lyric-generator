@@ -13,12 +13,9 @@ import {
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
-const openai = require("openai");
+import { OPENAI_API_KEY } from "@env";
 
 export default function LyricGenerator({ navigation }) {
-   const apiKey = process.env.OPENAI_API_KEY;
-   openai.apiKey = apiKey;
-
    const [prompt, setPrompt] = useState("");
    const [generatedLyrics, setGeneratedLyrics] = useState("");
    const [isEditingLyrics, setIsEditingLyrics] = useState(false);
@@ -27,13 +24,18 @@ export default function LyricGenerator({ navigation }) {
 
    async function handleGenerateLyrics() {
       setLoading(true);
-      const lyrics = await getAiResponse(
-         "Write a unique song about " + prompt,
-         apiKey
-      );
-      setLoading(false);
-      setGeneratedLyrics(lyrics);
-      setIsEditingLyrics(false); // reset editing mode
+      try {
+         const lyrics = await getAiResponse(prompt, OPENAI_API_KEY);
+         setLoading(false);
+         setGeneratedLyrics(lyrics);
+         setIsEditingLyrics(false); // reset editing mode
+      } catch (error) {
+         setLoading(false);
+         console.error("Error generating lyrics:", error);
+         alert(
+            "An error occurred while generating lyrics. Please check the console for more information."
+         );
+      }
    }
 
    function handleEditLyrics() {
