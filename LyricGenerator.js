@@ -23,6 +23,8 @@ export default function LyricGenerator({ navigation }) {
    const [loading, setLoading] = useState(false);
 
    async function handleGenerateLyrics() {
+      console.log("OPENAI_API_KEY:", OPENAI_API_KEY);
+
       setLoading(true);
       try {
          const lyrics = await getAiResponse(prompt, OPENAI_API_KEY);
