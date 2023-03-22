@@ -35,10 +35,11 @@ export default StyleSheet.create({
 
    image: {
       // width: "50%",
-      height: 200,
+      height: 120,
       resizeMode: "contain",
       marginBottom: 20,
    },
+
    input: {
       marginTop: 20,
       marginBottom: 10,
@@ -50,6 +51,14 @@ export default StyleSheet.create({
       color: "#8A2BE2",
       fontSize: 18,
    },
+
+   genrePicker: {
+      height: 10, // adjust the height of the Picker
+      width: "100%",
+      marginBottom: 200,
+      color: "#8A2BE2", // change the color of the selected item
+   },
+
    generatedLyrics: {
       marginTop: 1,
       textAlign: "center",

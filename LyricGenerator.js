@@ -12,11 +12,11 @@ import {
    TouchableOpacity,
 } from "react-native";
 import * as Speech from "expo-speech";
-import Slider from "@react-native-community/slider";
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { OPENAI_API_KEY } from "@env";
+import { Picker } from "@react-native-picker/picker";
 
 export default function LyricGenerator({ navigation }) {
    const [prompt, setPrompt] = useState("");
@@ -24,13 +24,16 @@ export default function LyricGenerator({ navigation }) {
    const [isEditingLyrics, setIsEditingLyrics] = useState(false);
    const [savedLyrics, setSavedLyrics] = useState([]);
    const [loading, setLoading] = useState(false);
-   const [pitch, setPitch] = useState(1);
-   const [rate, setRate] = useState(1);
+   const [selectedGenre, setSelectedGenre] = useState("Pop");
 
    async function handleGenerateLyrics() {
       setLoading(true);
       try {
-         const lyrics = await getAiResponse(prompt, OPENAI_API_KEY);
+         const lyrics = await getAiResponse(
+            prompt,
+            OPENAI_API_KEY,
+            selectedGenre
+         );
          setLoading(false);
          setGeneratedLyrics(lyrics);
          setIsEditingLyrics(false); // reset editing mode
@@ -87,13 +90,33 @@ export default function LyricGenerator({ navigation }) {
                <Text style={{ fontSize: 18, marginBottom: 10 }}>
                   Click me to hear your song!
                </Text>
+               {/* Genre Picker */}
+               <Text style={{ fontSize: 18, marginBottom: 10 }}>
+                  Select a Genre:
+               </Text>
+               <Picker
+                  selectedValue={selectedGenre}
+                  onValueChange={(itemValue) => setSelectedGenre(itemValue)}
+                  style={styles.genrePicker}
+               >
+                  <Picker.Item label="Select a genre..." value="" />
+                  <Picker.Item label="Pop" value="pop" />
+                  <Picker.Item label="Rock" value="rock" />
+                  <Picker.Item label="Hip Hop" value="hiphop" />
+                  <Picker.Item label="Country" value="country" />
+                  <Picker.Item label="R&B" value="rnb" />
+                  <Picker.Item label="Jazz" value="jazz" />
+                  <Picker.Item label="Blues" value="blues" />
+                  {/* Add more genres as needed */}
+               </Picker>
+               {/* Prompt Input */}
                <Text style={{ fontSize: 18, marginBottom: 10 }}>
                   Enter a Prompt to Generate Your Song!
                </Text>
                <TextInput
                   value={prompt}
                   onChangeText={(text) => setPrompt(text)}
-                  placeholder="e.g. Chickens and Turkeys"
+                  placeholder="e.g. "
                   style={styles.input}
                   multiline
                   numberOfLines={4}
@@ -104,7 +127,7 @@ export default function LyricGenerator({ navigation }) {
                   title="Generate Your Song!"
                   onPress={handleGenerateLyrics}
                />
-
+               {/* loading icon */}
                {loading ? (
                   <ActivityIndicator size="large" color="#ffffff" />
                ) : generatedLyrics !== "" ? (
@@ -137,18 +160,6 @@ export default function LyricGenerator({ navigation }) {
                   </>
                ) : null}
             </ScrollView>
-            {savedLyrics.length > 0 && (
-               <View style={styles.footer}>
-                  <Button
-                     title="View Saved Lyrics"
-                     onPress={() =>
-                        navigation.navigate("SavedLyrics", {
-                           savedLyrics: savedLyrics,
-                        })
-                     }
-                  />
-               </View>
-            )}
          </LinearGradient>
       </KeyboardAvoidingView>
    );

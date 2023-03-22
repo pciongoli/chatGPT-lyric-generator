@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const getAiResponse = async (prompt, apiKey) => {
+const getAiResponse = async (prompt, apiKey, genre) => {
    try {
+      const genrePrompt = genre ? ` in ${genre} genre` : "";
       const response = await axios.post(
          "https://api.openai.com/v1/engines/text-davinci-003/completions",
          {
-            prompt: `Generate a unique song about ${prompt}\n\nGenerated Lyrics:`,
+            prompt: `Generate a unique song about ${prompt}${genrePrompt}\n\nGenerated Lyrics:`,
             temperature: 0.7,
             max_tokens: 150,
             n: 1,
