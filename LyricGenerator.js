@@ -10,8 +10,10 @@ import {
    Clipboard,
    ActivityIndicator,
    TouchableOpacity,
+   Keyboard,
 } from "react-native";
 import * as Speech from "expo-speech";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -58,60 +60,101 @@ export default function LyricGenerator({ navigation }) {
       Clipboard.setString(generatedLyrics);
    }
 
+   function dismissKeyboard() {
+      Keyboard.dismiss();
+   }
+
    async function speakLyrics() {
       const isSpeaking = await Speech.isSpeakingAsync();
 
       if (isSpeaking) {
          Speech.stop();
       } else {
-         Speech.speak(generatedLyrics, { pitch, rate });
+         Speech.speak(generatedLyrics);
       }
    }
 
    return (
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
-         <LinearGradient
-            colors={["#C6E1F7", "#CEE5F2"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.container}
-         >
-            <View style={styles.titleContainer}>
-               <Text style={styles.title}>LyriCat</Text>
-            </View>
+      <LinearGradient
+         colors={["#76C4AE", "#9FC2BA"]}
+         start={{ x: 0, y: 0 }}
+         end={{ x: 1, y: 1 }}
+         style={styles.container}
+      >
+         <View style={styles.titleContainer}>
+            <Text style={styles.title}>LyriCat</Text>
+         </View>
 
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-               <TouchableOpacity onPress={speakLyrics}>
-                  <Image
-                     source={require("./assets/img/lyriCat.jpg")}
-                     style={styles.image}
-                  />
-               </TouchableOpacity>
-               <Text style={{ fontSize: 18, marginBottom: 10 }}>
-                  Click me to hear your song!
-               </Text>
-               {/* Genre Picker */}
-               <Text style={{ fontSize: 18, marginBottom: 10 }}>
-                  Select a Genre:
-               </Text>
+         <KeyboardAwareScrollView
+            contentContainerStyle={styles.scrollContainer}
+            extraHeight={100}
+         >
+            <TouchableOpacity
+               onPress={dismissKeyboard}
+               activeOpacity={1}
+               style={{ flex: 1, width: "100%" }}
+            >
+               <View style={styles.imageContainer}>
+                  <TouchableOpacity onPress={speakLyrics}>
+                     <Image
+                        source={require("./assets/img/lyriCat.jpg")}
+                        style={styles.image}
+                     />
+                  </TouchableOpacity>
+                  <Text style={styles.imageText}>
+                     Click me to hear your song!
+                  </Text>
+               </View>
+
                <Picker
                   selectedValue={selectedGenre}
                   onValueChange={(itemValue) => setSelectedGenre(itemValue)}
                   style={styles.genrePicker}
                >
                   <Picker.Item label="Select a genre..." value="" />
-                  <Picker.Item label="Pop" value="pop" />
-                  <Picker.Item label="Rock" value="rock" />
-                  <Picker.Item label="Hip Hop" value="hiphop" />
-                  <Picker.Item label="Country" value="country" />
-                  <Picker.Item label="R&B" value="rnb" />
-                  <Picker.Item label="Jazz" value="jazz" />
+                  <Picker.Item label="Acoustic" value="acoustic" />
+                  <Picker.Item label="Alternative Rock" value="alternative" />
                   <Picker.Item label="Blues" value="blues" />
+                  <Picker.Item label="Classical" value="classical" />
+                  <Picker.Item label="Country" value="country" />
+                  <Picker.Item label="Dance Music" value="dance" />
+                  <Picker.Item label="Disco" value="disco" />
+                  <Picker.Item label="Electronic Music" value="electronic" />
+                  <Picker.Item label="Folk" value="folk" />
+                  <Picker.Item label="Gospel" value="gospel" />
+                  <Picker.Item label="Heavy Metal" value="metal" />
+                  <Picker.Item label="Hip Hop" value="hiphop" />
+                  <Picker.Item label="Indie" value="indie" />
+                  <Picker.Item label="Jazz" value="jazz" />
+                  <Picker.Item label="Latin" value="latin" />
+                  <Picker.Item label="New Wave" value="wave" />
+                  <Picker.Item label="Opera" value="opera" />
+                  <Picker.Item label="Pop" value="pop" />
+                  <Picker.Item label="Punk" value="punk" />
+                  <Picker.Item label="R&B" value="rnb" />
+                  <Picker.Item label="Reggae" value="reggae" />
+                  <Picker.Item label="Rock" value="rock" />
+                  <Picker.Item label="Soul" value="soul" />
+                  <Picker.Item label="Haiku" value="haiku" />
+                  <Picker.Item label="Ballad" value="ballad" />
+                  <Picker.Item label="Elegy" value="elegy" />
+                  <Picker.Item label="Free Verse" value="freeverse" />
+                  <Picker.Item label="Haiku" value="haiku" />
+                  <Picker.Item label="Limerick" value="limerick" />
+                  <Picker.Item label="Ode" value="ode" />
+                  <Picker.Item label="Sonnet" value="sonnet" />
+                  <Picker.Item label="Villanelle" value="villanelle" />
+
                   {/* Add more genres as needed */}
                </Picker>
-               {/* Prompt Input */}
-               <Text style={{ fontSize: 18, marginBottom: 10 }}>
-                  Enter a Prompt to Generate Your Song!
+               <Text
+                  style={{
+                     fontSize: 18,
+                     marginBottom: 10,
+                     textAlign: "center",
+                  }}
+               >
+                  Enter a Topic to Generate Your Song!
                </Text>
                <TextInput
                   value={prompt}
@@ -127,7 +170,6 @@ export default function LyricGenerator({ navigation }) {
                   title="Generate Your Song!"
                   onPress={handleGenerateLyrics}
                />
-               {/* loading icon */}
                {loading ? (
                   <ActivityIndicator size="large" color="#ffffff" />
                ) : generatedLyrics !== "" ? (
@@ -159,8 +201,8 @@ export default function LyricGenerator({ navigation }) {
                      )}
                   </>
                ) : null}
-            </ScrollView>
-         </LinearGradient>
-      </KeyboardAvoidingView>
+            </TouchableOpacity>
+         </KeyboardAwareScrollView>
+      </LinearGradient>
    );
 }

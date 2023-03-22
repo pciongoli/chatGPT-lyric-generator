@@ -1,6 +1,7 @@
 // styles.js
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const screenWidth = Dimensions.get("window").width;
 
 export default StyleSheet.create({
    container: {
@@ -15,7 +16,7 @@ export default StyleSheet.create({
    },
    titleContainer: {
       position: "relative",
-      top: 55,
+      top: 37,
       left: 0,
       right: 0,
       alignItems: "center",
@@ -26,7 +27,7 @@ export default StyleSheet.create({
    title: {
       fontSize: 36,
       fontWeight: "bold",
-      color: "#8A2BE2",
+      color: "#7CE0F9",
       textShadowColor: "#8A2BE2",
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
@@ -50,6 +51,9 @@ export default StyleSheet.create({
       width: "100%",
       color: "#8A2BE2",
       fontSize: 18,
+      maxHeight: 300,
+      textAlignVertical: "top",
+      maxWidth: screenWidth, // Add this line to set a maxWidth value
    },
 
    genrePicker: {
@@ -68,7 +72,7 @@ export default StyleSheet.create({
    },
 
    button: {
-      color: "blue",
+      color: "#DDBOAO",
    },
    savedLyricsContainer: {
       marginTop: 20,
@@ -148,6 +152,18 @@ export default StyleSheet.create({
    },
    messageText: {
       color: "green",
+      fontSize: 18,
+   },
+   imageContainer: {
+      alignItems: "center",
+      justifyContent: "center", // optional, if you want to center the entire container horizontally
+   },
+   imageWrapper: {
+      flexDirection: "row",
+      alignItems: "center",
+   },
+   imageText: {
+      marginLeft: 10, // optional, add some spacing between the image and the text
       fontSize: 18,
    },
 });
