@@ -12,6 +12,7 @@ import {
    TouchableOpacity,
 } from "react-native";
 import * as Speech from "expo-speech";
+import Slider from "@react-native-community/slider";
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -23,6 +24,8 @@ export default function LyricGenerator({ navigation }) {
    const [isEditingLyrics, setIsEditingLyrics] = useState(false);
    const [savedLyrics, setSavedLyrics] = useState([]);
    const [loading, setLoading] = useState(false);
+   const [pitch, setPitch] = useState(1);
+   const [rate, setRate] = useState(1);
 
    async function handleGenerateLyrics() {
       setLoading(true);
@@ -52,8 +55,14 @@ export default function LyricGenerator({ navigation }) {
       Clipboard.setString(generatedLyrics);
    }
 
-   function speakLyrics() {
-      Speech.speak(generatedLyrics);
+   async function speakLyrics() {
+      const isSpeaking = await Speech.isSpeakingAsync();
+
+      if (isSpeaking) {
+         Speech.stop();
+      } else {
+         Speech.speak(generatedLyrics, { pitch, rate });
+      }
    }
 
    return (
@@ -76,6 +85,9 @@ export default function LyricGenerator({ navigation }) {
                   />
                </TouchableOpacity>
                <Text style={{ fontSize: 18, marginBottom: 10 }}>
+                  Click me to hear your song!
+               </Text>
+               <Text style={{ fontSize: 18, marginBottom: 10 }}>
                   Enter a Prompt to Generate Your Song!
                </Text>
                <TextInput
@@ -92,6 +104,7 @@ export default function LyricGenerator({ navigation }) {
                   title="Generate Your Song!"
                   onPress={handleGenerateLyrics}
                />
+
                {loading ? (
                   <ActivityIndicator size="large" color="#ffffff" />
                ) : generatedLyrics !== "" ? (
