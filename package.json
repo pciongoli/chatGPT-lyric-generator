@@ -1,28 +1,29 @@
 {
-   "name": "chatgpt-lyric-generator",
-   "version": "1.0.0",
-   "main": "node_modules/expo/AppEntry.js",
-   "scripts": {
-      "start": "expo start",
-      "android": "expo start --android",
-      "ios": "expo start --ios",
-      "web": "expo start --web"
-   },
-   "dependencies": {
-      "@react-native-clipboard/clipboard": "^1.11.2",
-      "@react-navigation/bottom-tabs": "^6.5.7",
-      "@react-navigation/native": "^6.0.8",
-      "axios": "^1.3.4",
-      "expo": "~48.0.6",
-      "expo-linear-gradient": "^12.1.2",
-      "expo-status-bar": "~1.4.4",
-      "openai": "^3.2.1",
-      "react": "18.2.0",
-      "react-native": "0.71.3"
-   },
-   "devDependencies": {
-      "@babel/core": "^7.20.0",
-      "react-native-dotenv": "^3.4.8"
-   },
-   "private": true
+  "name": "chatgpt-lyric-generator",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-clipboard/clipboard": "^1.11.2",
+    "@react-navigation/bottom-tabs": "^6.5.7",
+    "@react-navigation/native": "^6.0.8",
+    "axios": "^1.3.4",
+    "expo": "~48.0.6",
+    "expo-linear-gradient": "^12.1.2",
+    "expo-status-bar": "~1.4.4",
+    "openai": "^3.2.1",
+    "react": "18.2.0",
+    "react-native": "0.71.4",
+    "expo-speech": "~11.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.8"
+  },
+  "private": true
 }

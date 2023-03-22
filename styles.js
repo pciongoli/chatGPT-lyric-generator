@@ -34,7 +34,7 @@ export default StyleSheet.create({
    },
 
    image: {
-      width: "50%",
+      // width: "50%",
       height: 200,
       resizeMode: "contain",
       marginBottom: 20,

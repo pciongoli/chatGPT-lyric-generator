@@ -9,7 +9,9 @@ import {
    KeyboardAvoidingView,
    Clipboard,
    ActivityIndicator,
+   TouchableOpacity,
 } from "react-native";
+import * as Speech from "expo-speech";
 import getAiResponse from "./getAiResponse";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -23,8 +25,6 @@ export default function LyricGenerator({ navigation }) {
    const [loading, setLoading] = useState(false);
 
    async function handleGenerateLyrics() {
-      console.log("OPENAI_API_KEY:", OPENAI_API_KEY);
-
       setLoading(true);
       try {
          const lyrics = await getAiResponse(prompt, OPENAI_API_KEY);
@@ -52,6 +52,10 @@ export default function LyricGenerator({ navigation }) {
       Clipboard.setString(generatedLyrics);
    }
 
+   function speakLyrics() {
+      Speech.speak(generatedLyrics);
+   }
+
    return (
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
          <LinearGradient
@@ -65,10 +69,12 @@ export default function LyricGenerator({ navigation }) {
             </View>
 
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-               <Image
-                  source={require("./assets/img/lyriCat.jpg")}
-                  style={styles.image}
-               />
+               <TouchableOpacity onPress={speakLyrics}>
+                  <Image
+                     source={require("./assets/img/lyriCat.jpg")}
+                     style={styles.image}
+                  />
+               </TouchableOpacity>
                <Text style={{ fontSize: 18, marginBottom: 10 }}>
                   Enter a Prompt to Generate Your Song!
                </Text>
@@ -80,7 +86,7 @@ export default function LyricGenerator({ navigation }) {
                   multiline
                   numberOfLines={4}
                   textAlignVertical="top"
-                  onBlur={handleEndEditingLyrics} // call handleEndEditingLyrics when the user leaves the text input
+                  onBlur={handleEndEditingLyrics}
                />
                <Button
                   title="Generate Your Song!"
@@ -108,7 +114,6 @@ export default function LyricGenerator({ navigation }) {
                            >
                               {generatedLyrics}
                            </Text>
-
                            <Button
                               style={styles.button}
                               title="Copy"
