@@ -1,8 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import LyricGenerator from "./LyricGenerator";
-import SavedLyrics from "./SavedLyrics";
+import LyricGenerator from "./pages/LyricGenerator";
+import SavedLyrics from "./pages/SavedLyrics";
 
 const Tab = createBottomTabNavigator();
 

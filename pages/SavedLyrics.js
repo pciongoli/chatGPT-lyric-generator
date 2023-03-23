@@ -8,7 +8,7 @@ import {
    TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "./styles";
+import styles from "../styles";
 
 export default function SavedLyrics({ route }) {
    const [newLyrics, setNewLyrics] = useState("");
