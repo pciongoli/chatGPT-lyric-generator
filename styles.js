@@ -32,6 +32,7 @@ export default StyleSheet.create({
       textShadowOffset: { width: 1, height: 1 },
       textShadowRadius: 2,
       alignSelf: "center", // add this line
+      fontFamily: "ShantellSans",
    },
 
    image: {
@@ -39,6 +40,14 @@ export default StyleSheet.create({
       height: 120,
       resizeMode: "contain",
       marginBottom: 20,
+      marginTop: 20,
+   },
+
+   imageText: {
+      marginLeft: 10, // optional, add some spacing between the image and the text
+      fontSize: 18,
+      fontFamily: "ShantellSans",
+      color: "#8A2BE2",
    },
 
    input: {
@@ -54,6 +63,7 @@ export default StyleSheet.create({
       maxHeight: 300,
       textAlignVertical: "top",
       maxWidth: screenWidth, // Add this line to set a maxWidth value
+      fontFamily: "ShantellSans",
    },
 
    genrePicker: {
@@ -61,6 +71,8 @@ export default StyleSheet.create({
       width: "100%",
       marginBottom: 200,
       color: "#8A2BE2", // change the color of the selected item
+      fontFamily: "ShantellSans",
+      color: "#8A2BE2",
    },
 
    generatedLyrics: {
@@ -69,11 +81,17 @@ export default StyleSheet.create({
       color: "#8A2BE2",
       fontSize: 18,
       marginBottom: 20, // or paddingBottom: 20
+      fontFamily: "ShantellSans",
    },
 
-   button: {
-      color: "#DDBOAO",
+   generateText: {
+      fontSize: 20,
+      marginBottom: 10,
+      textAlign: "center",
+      fontFamily: "ShantellSans",
+      color: "#8A2BE2",
    },
+
    savedLyricsContainer: {
       marginTop: 20,
       padding: 10,
@@ -90,11 +108,13 @@ export default StyleSheet.create({
       color: "#8A2BE2",
       fontSize: 18,
       textAlign: "center", // center the text horizontally
+      fontFamily: "ShantellSans",
    },
    addLyricsContainer: {
       marginTop: 20,
       width: "65%",
       alignSelf: "center", // add this line
+      fontFamily: "ShantellSans",
    },
 
    addLyricsInput: {
@@ -119,16 +139,20 @@ export default StyleSheet.create({
       width: "100%",
    },
    button: {
+      width: "100%",
       paddingVertical: 10,
       paddingHorizontal: 30,
       borderRadius: 10,
-      backgroundColor: "#8A2BE2",
-      marginRight: 10,
+      backgroundColor: "#8A2BE2", // change the background color if desired
+      marginTop: 20,
    },
+
    buttonText: {
-      color: "white",
+      color: "white", // change the text color if desired
       fontSize: 18,
       fontWeight: "bold",
+      fontFamily: "ShantellSans",
+      textAlign: "center",
    },
    pasteButton: {
       paddingVertical: 10,
@@ -136,8 +160,22 @@ export default StyleSheet.create({
       borderRadius: 10,
       backgroundColor: "#8A2BE2",
       marginLeft: 10,
+      fontFamily: "ShantellSans",
+   },
+   saveButton: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+      borderRadius: 10,
+      backgroundColor: "#8A2BE2",
+      marginLeft: 10,
+      fontFamily: "ShantellSans",
    },
    pasteButtonText: {
+      color: "white",
+      fontSize: 18,
+      fontWeight: "bold",
+   },
+   saveButtonText: {
       color: "white",
       fontSize: 18,
       fontWeight: "bold",
@@ -153,6 +191,7 @@ export default StyleSheet.create({
    messageText: {
       color: "green",
       fontSize: 18,
+      fontFamily: "ShantellSans",
    },
    imageContainer: {
       alignItems: "center",
@@ -162,8 +201,30 @@ export default StyleSheet.create({
       flexDirection: "row",
       alignItems: "center",
    },
-   imageText: {
-      marginLeft: 10, // optional, add some spacing between the image and the text
+   savedTitle: {
+      fontSize: 36,
+      fontWeight: "bold",
+      color: "#7CE0F9",
+      textShadowColor: "#8A2BE2",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+      alignSelf: "center", // add this line
+      fontFamily: "ShantellSans",
+   },
+   generateButton: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+      borderRadius: 10,
+      backgroundColor: "#8A2BE2", // change the background color if desired
+      marginTop: 20, // add a margin to space it out from the other elements
+      marginBottom: 30,
+   },
+
+   generateButtonText: {
+      color: "white", // change the text color if desired
       fontSize: 18,
+      fontWeight: "bold",
+      fontFamily: "ShantellSans",
+      textAlign: "center",
    },
 });

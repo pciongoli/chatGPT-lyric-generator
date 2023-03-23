@@ -4,8 +4,8 @@ import {
    Text,
    ScrollView,
    TextInput,
-   Button,
    Clipboard,
+   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
@@ -29,34 +29,40 @@ export default function SavedLyrics({ route }) {
 
    return (
       <LinearGradient
-         colors={["#C6E1F7", "#CEE5F2"]}
+         colors={["#76C4AE", "#9FC2BA"]}
          start={{ x: 0, y: 0 }}
          end={{ x: 1, y: 1 }}
          style={styles.container}
       >
          <ScrollView contentContainerStyle={styles.scrollContainer}>
-            <View>
-               <Text style={{ fontSize: 20, marginBottom: 10 }}>
-                  Saved Lyrics
-               </Text>
-               {savedLyrics.map((lyrics, index) => (
-                  <View style={styles.savedLyricsContainer} key={index}>
-                     <Text style={styles.savedLyrics}>{lyrics}</Text>
-                  </View>
-               ))}
-               <TextInput
-                  value={newLyrics}
-                  onChangeText={(text) => setNewLyrics(text)}
-                  placeholder="Paste your lyrics here"
-                  style={styles.input}
-                  multiline
-                  numberOfLines={4}
-                  textAlignVertical="top"
-               />
-               <View style={{ flexDirection: "row" }}>
-                  <Button title="Save" onPress={handleSaveLyrics} />
-                  <Button title="Paste" onPress={handlePasteLyrics} />
+            <Text style={styles.savedTitle}>Saved Lyrics</Text>
+            {savedLyrics.map((lyrics, index) => (
+               <View style={styles.savedLyricsContainer} key={index}>
+                  <Text style={styles.savedLyrics}>{lyrics}</Text>
                </View>
+            ))}
+            <TextInput
+               value={newLyrics}
+               onChangeText={(text) => setNewLyrics(text)}
+               placeholder="Paste your lyrics here"
+               style={styles.input}
+               multiline
+               numberOfLines={4}
+               textAlignVertical="top"
+            />
+            <View style={{ flexDirection: "row" }}>
+               <TouchableOpacity
+                  style={styles.saveButton}
+                  onPress={handleSaveLyrics}
+               >
+                  <Text style={styles.saveButtonText}>Save</Text>
+               </TouchableOpacity>
+               <TouchableOpacity
+                  style={styles.pasteButton}
+                  onPress={handlePasteLyrics}
+               >
+                  <Text style={styles.pasteButtonText}>Paste</Text>
+               </TouchableOpacity>
             </View>
          </ScrollView>
       </LinearGradient>

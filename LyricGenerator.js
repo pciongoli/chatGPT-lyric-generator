@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
    View,
    TextInput,
-   Button,
    Text,
-   ScrollView,
    Image,
-   KeyboardAvoidingView,
    Clipboard,
    ActivityIndicator,
    TouchableOpacity,
@@ -19,6 +16,7 @@ import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { OPENAI_API_KEY } from "@env";
 import { Picker } from "@react-native-picker/picker";
+import * as Font from "expo-font";
 
 export default function LyricGenerator({ navigation }) {
    const [prompt, setPrompt] = useState("");
@@ -27,6 +25,21 @@ export default function LyricGenerator({ navigation }) {
    const [savedLyrics, setSavedLyrics] = useState([]);
    const [loading, setLoading] = useState(false);
    const [selectedGenre, setSelectedGenre] = useState("Pop");
+   const [fontsLoaded, setFontsLoaded] = useState(false);
+
+   useEffect(() => {
+      async function loadFonts() {
+         await Font.loadAsync({
+            ShantellSans: require("./assets/fonts/ShantellSans-Regular.ttf"),
+         });
+         setFontsLoaded(true);
+      }
+      loadFonts();
+   }, []);
+
+   if (!fontsLoaded) {
+      return <ActivityIndicator size="large" color="#ffffff" />;
+   }
 
    async function handleGenerateLyrics() {
       setLoading(true);
@@ -147,13 +160,7 @@ export default function LyricGenerator({ navigation }) {
 
                   {/* Add more genres as needed */}
                </Picker>
-               <Text
-                  style={{
-                     fontSize: 18,
-                     marginBottom: 10,
-                     textAlign: "center",
-                  }}
-               >
+               <Text style={styles.generateText}>
                   Enter a Topic to Generate Your Song!
                </Text>
                <TextInput
@@ -166,10 +173,14 @@ export default function LyricGenerator({ navigation }) {
                   textAlignVertical="top"
                   onBlur={handleEndEditingLyrics}
                />
-               <Button
-                  title="Generate Your Song!"
+               <TouchableOpacity
+                  style={styles.generateButton}
                   onPress={handleGenerateLyrics}
-               />
+               >
+                  <Text style={styles.generateButtonText}>
+                     Generate Your Song!
+                  </Text>
+               </TouchableOpacity>
                {loading ? (
                   <ActivityIndicator size="large" color="#ffffff" />
                ) : generatedLyrics !== "" ? (
@@ -192,11 +203,12 @@ export default function LyricGenerator({ navigation }) {
                            >
                               {generatedLyrics}
                            </Text>
-                           <Button
+                           <TouchableOpacity
                               style={styles.button}
-                              title="Copy"
                               onPress={handleCopyLyrics}
-                           />
+                           >
+                              <Text style={styles.buttonText}>Copy</Text>
+                           </TouchableOpacity>
                         </View>
                      )}
                   </>

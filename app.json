@@ -12,6 +12,11 @@
          "backgroundColor": "#ffffff"
       },
       "assetBundlePatterns": ["**/*"],
+      "fonts": [
+         {
+            "ShantellSans": "./assets/fonts/ShantellSans-Regular.ttf"
+         }
+      ],
       "ios": {
          "bundleIdentifier": "com.pciongoli.chatGPTlyricgenerator"
       },

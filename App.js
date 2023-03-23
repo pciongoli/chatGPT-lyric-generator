@@ -15,7 +15,11 @@ export default function App() {
                component={LyricGenerator}
                options={{ headerShown: false }}
             />
-            <Tab.Screen name="Saved Lyrics" component={SavedLyrics} />
+            <Tab.Screen
+               name="Saved Lyrics"
+               component={SavedLyrics}
+               options={{ headerShown: false }}
+            />
          </Tab.Navigator>
       </NavigationContainer>
    );
