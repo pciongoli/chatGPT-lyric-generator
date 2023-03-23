@@ -1,12 +1,14 @@
 // styles.js
 
 import { StyleSheet, Dimensions } from "react-native";
+
 const screenWidth = Dimensions.get("window").width;
 
 export default StyleSheet.create({
    container: {
       flex: 1,
    },
+
    scrollContainer: {
       flexGrow: 1,
       justifyContent: "center",
@@ -14,6 +16,7 @@ export default StyleSheet.create({
       padding: 20,
       paddingBottom: 100, // add padding to the bottom of the ScrollView
    },
+
    titleContainer: {
       position: "relative",
       top: 37,
@@ -35,6 +38,16 @@ export default StyleSheet.create({
       fontFamily: "ShantellSans",
    },
 
+   imageContainer: {
+      alignItems: "center",
+      justifyContent: "center", // optional, if you want to center the entire container horizontally
+   },
+
+   imageWrapper: {
+      flexDirection: "row",
+      alignItems: "center",
+   },
+
    image: {
       // width: "50%",
       height: 120,
@@ -45,7 +58,7 @@ export default StyleSheet.create({
 
    imageText: {
       marginLeft: 10, // optional, add some spacing between the image and the text
-      fontSize: 18,
+      fontSize: 25,
       fontFamily: "ShantellSans",
       color: "#8A2BE2",
    },
@@ -72,7 +85,6 @@ export default StyleSheet.create({
       marginBottom: 200,
       color: "#8A2BE2", // change the color of the selected item
       fontFamily: "ShantellSans",
-      color: "#8A2BE2",
    },
 
    generatedLyrics: {
@@ -85,11 +97,24 @@ export default StyleSheet.create({
    },
 
    generateText: {
-      fontSize: 20,
+      fontSize: 25,
       marginBottom: 10,
       textAlign: "center",
       fontFamily: "ShantellSans",
       color: "#8A2BE2",
+   },
+
+   // saved styling
+
+   savedTitle: {
+      fontSize: 36,
+      fontWeight: "bold",
+      color: "#7CE0F9",
+      textShadowColor: "#8A2BE2",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 2,
+      alignSelf: "center", // add this line
+      fontFamily: "ShantellSans",
    },
 
    savedLyricsContainer: {
@@ -110,6 +135,7 @@ export default StyleSheet.create({
       textAlign: "center", // center the text horizontally
       fontFamily: "ShantellSans",
    },
+
    addLyricsContainer: {
       marginTop: 20,
       width: "65%",
@@ -132,12 +158,15 @@ export default StyleSheet.create({
       maxHeight: "50%", // adjust this value as needed
    },
 
+   // button styling
+
    buttonContainer: {
       flexDirection: "row",
       justifyContent: "space-between",
       marginTop: 20,
       width: "100%",
    },
+
    button: {
       width: "100%",
       paddingVertical: 10,
@@ -154,6 +183,7 @@ export default StyleSheet.create({
       fontFamily: "ShantellSans",
       textAlign: "center",
    },
+
    pasteButton: {
       paddingVertical: 10,
       paddingHorizontal: 30,
@@ -162,6 +192,7 @@ export default StyleSheet.create({
       marginLeft: 10,
       fontFamily: "ShantellSans",
    },
+
    saveButton: {
       paddingVertical: 10,
       paddingHorizontal: 30,
@@ -170,47 +201,19 @@ export default StyleSheet.create({
       marginLeft: 10,
       fontFamily: "ShantellSans",
    },
+
    pasteButtonText: {
       color: "white",
       fontSize: 18,
       fontWeight: "bold",
    },
+
    saveButtonText: {
       color: "white",
       fontSize: 18,
       fontWeight: "bold",
    },
-   messageContainer: {
-      marginTop: 20,
-      padding: 10,
-      backgroundColor: "white",
-      borderRadius: 10,
-      width: "100%",
-      alignItems: "center",
-   },
-   messageText: {
-      color: "green",
-      fontSize: 18,
-      fontFamily: "ShantellSans",
-   },
-   imageContainer: {
-      alignItems: "center",
-      justifyContent: "center", // optional, if you want to center the entire container horizontally
-   },
-   imageWrapper: {
-      flexDirection: "row",
-      alignItems: "center",
-   },
-   savedTitle: {
-      fontSize: 36,
-      fontWeight: "bold",
-      color: "#7CE0F9",
-      textShadowColor: "#8A2BE2",
-      textShadowOffset: { width: 1, height: 1 },
-      textShadowRadius: 2,
-      alignSelf: "center", // add this line
-      fontFamily: "ShantellSans",
-   },
+
    generateButton: {
       paddingVertical: 10,
       paddingHorizontal: 30,
@@ -226,5 +229,20 @@ export default StyleSheet.create({
       fontWeight: "bold",
       fontFamily: "ShantellSans",
       textAlign: "center",
+   },
+
+   messageContainer: {
+      marginTop: 20,
+      padding: 10,
+      backgroundColor: "white",
+      borderRadius: 10,
+      width: "100%",
+      alignItems: "center",
+   },
+
+   messageText: {
+      color: "green",
+      fontSize: 18,
+      fontFamily: "ShantellSans",
    },
 });

@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import {
    View,
    TextInput,
+   Button,
    Text,
    Image,
    Clipboard,
    ActivityIndicator,
    TouchableOpacity,
    Keyboard,
+   Animated,
+   Easing,
 } from "react-native";
+
 import * as Speech from "expo-speech";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import getAiResponse from "./getAiResponse";
@@ -26,6 +30,7 @@ export default function LyricGenerator({ navigation }) {
    const [loading, setLoading] = useState(false);
    const [selectedGenre, setSelectedGenre] = useState("Pop");
    const [fontsLoaded, setFontsLoaded] = useState(false);
+   const [opacityAnim] = useState(new Animated.Value(1));
 
    useEffect(() => {
       async function loadFonts() {
@@ -77,13 +82,55 @@ export default function LyricGenerator({ navigation }) {
       Keyboard.dismiss();
    }
 
+   function startAnimationLoop() {
+      Animated.sequence([
+         Animated.timing(opacityAnim, {
+            toValue: 0.5,
+            duration: 500,
+            easing: Easing.linear,
+            useNativeDriver: true,
+         }),
+         Animated.timing(opacityAnim, {
+            toValue: 1,
+            duration: 500,
+            easing: Easing.linear,
+            useNativeDriver: true,
+         }),
+      ]).start(() => {
+         if (!speechStopped) {
+            startAnimationLoop();
+         }
+      });
+   }
+
+   let speechStopped = false;
+
    async function speakLyrics() {
       const isSpeaking = await Speech.isSpeakingAsync();
 
       if (isSpeaking) {
+         speechStopped = true;
          Speech.stop();
+         Animated.timing(opacityAnim, {
+            toValue: 1,
+            duration: 500,
+            easing: Easing.linear,
+            useNativeDriver: true,
+         }).start();
       } else {
-         Speech.speak(generatedLyrics);
+         speechStopped = false;
+         startAnimationLoop();
+         Speech.speak(generatedLyrics, {
+            onDone: () => {
+               speechStopped = true;
+               Animated.timing(opacityAnim, {
+                  toValue: 1,
+                  duration: 500,
+                  easing: Easing.linear,
+                  useNativeDriver: true,
+               }).start();
+            },
+         });
       }
    }
 
@@ -109,9 +156,14 @@ export default function LyricGenerator({ navigation }) {
             >
                <View style={styles.imageContainer}>
                   <TouchableOpacity onPress={speakLyrics}>
-                     <Image
+                     <Animated.Image
                         source={require("./assets/img/lyriCat.jpg")}
-                        style={styles.image}
+                        style={[
+                           styles.image,
+                           {
+                              opacity: opacityAnim,
+                           },
+                        ]}
                      />
                   </TouchableOpacity>
                   <Text style={styles.imageText}>
@@ -166,7 +218,7 @@ export default function LyricGenerator({ navigation }) {
                <TextInput
                   value={prompt}
                   onChangeText={(text) => setPrompt(text)}
-                  placeholder="e.g. "
+                  placeholder="e.g. Singing Cats"
                   style={styles.input}
                   multiline
                   numberOfLines={4}
